@@ -15,13 +15,15 @@ function Navbar() {
     setIsNavOpen(!isNavOpen);
   };
 
-  const [width, setWidth] = useState(window.innerWidth);
+  const [width, setWidth] = useState(null);
 
   const updateDimensions = () => {
     setWidth(window.innerWidth);
   };
 
   useEffect(() => {
+    setWidth(window.innerWidth);
+
     window.addEventListener("resize", updateDimensions);
   }, []);
 
@@ -70,10 +72,11 @@ const Wrapper = styled.nav`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1.5rem 1rem;
+  padding: ${(props) => props.theme.mobilePadding};
+
   @media screen and (min-width: 768px) {
     gap: 2rem;
-    padding: 1rem 3rem;
+    padding: ${(props) => props.theme.desktopPadding};
   }
 
   .logo {
