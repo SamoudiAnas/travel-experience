@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import {useSession, signIn, signOut} from 'next-auth/react'
+import Notification from '../../components/UI/notification'
 
 async function createUser(name, email, password){
   const response = await fetch('../api/auth/signup',
@@ -24,27 +25,43 @@ const Login = () => {
     useEffect(() => {
         switchFunction();
     }, []);
-    const switchFunction = () => {
-        const sign_in_btn = document.querySelector('#sign-in-btn');
-        const sign_up_btn = document.querySelector('#sign-up-btn');
-        const container = document.querySelector('.container');
-
-        sign_up_btn.addEventListener('click', () => {
-            container.classList.add('sign-up-mode');
-        });
-
-        sign_in_btn.addEventListener("click", () => {
-            container.classList.remove("sign-up-mode");
-          });
-    };
 
     const [name, setName] = useState();
     const [email, setEmail] = useState();
     const [password, setPassword] = useState();
-    const [session, loading] = useState();
+    const [requestStatus, setRequestStatus] = useState();
+    const [requestError, setRequestError] = useState();
+    const {session, loading} = useSession();
+
+    useEffect(() => {
+      if(requestStatus === 'success' || requestStatus === 'error'){
+        const timer = setTimeout(() => {
+          setRequestStatus(null);
+          setRequestError(null);
+        }, 3000);
+
+        return () => clearTimeout(timer);
+      }
+    }, [requestStatus]);
+
+ 
 
     const enteredEmail = useRef();
     const enteredPassword = useRef();
+
+    const switchFunction = () => {
+      const sign_in_btn = document.querySelector('#sign-in-btn');
+      const sign_up_btn = document.querySelector('#sign-up-btn');
+      const container = document.querySelector('.container');
+
+      sign_up_btn.addEventListener('click', () => {
+          container.classList.add('sign-up-mode');
+      });
+
+      sign_in_btn.addEventListener("click", () => {
+          container.classList.remove("sign-up-mode");
+        });
+  };
 
     const nameChangeHandler = (event) => {
       setName(event.target.value);
@@ -59,8 +76,10 @@ const Login = () => {
     const signUpFormHandler = async (event) => {
       event.preventDefault();
        // Add Validation for later.
+      setRequestStatus('pending');
       try{
         const result = await createUser(name, email, password);
+        setRequestStatus('success');
         console.log(result);
         setName('');
         setEmail('');
@@ -68,6 +87,8 @@ const Login = () => {
       }
       catch(error){
         console.log(error);
+        setRequestError(error.message);
+        setRequestStatus('error');
       }
     }
 
@@ -79,6 +100,49 @@ const Login = () => {
       console.log(result);
       console.log(session);
     } 
+
+    if(loading){
+      return <p>Loading...</p>;
+    }
+
+    if(session){
+      return (
+
+        <div className="container">
+  
+          Welcome user<br />
+  
+          <button onClick={() => signOut()}>Sign out</button>
+  
+        </div>
+  
+      );
+    }
+
+    let notification;
+    if(requestStatus === 'pending'){
+      notification = {
+        status: 'pending',
+        title: 'Sending data...',
+        message: 'Your data is being registered in our database.'
+      }
+    }
+
+    if(requestStatus === 'success'){
+      notification = {
+        status: 'success',
+        title: 'Success',
+        message: 'Your data has been registered successfully!'
+      }
+    }
+
+    if(requestStatus === 'error'){
+      notification = {
+        status: 'error',
+        title: 'Error',
+        message: requestError
+      }
+    }
 
     return ( 
     <div className="container">
@@ -102,13 +166,13 @@ const Login = () => {
             <p className="social-text">Or Sign in with social platforms</p>
 
             <div className="social-media">
-              <a href="#" className="social-icon">
+              <a onClick={() => signIn()} className="social-icon">
                 <i className="ri-google-line"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a onClick={() => signIn()} className="social-icon">
                 <i className="ri-facebook-line"></i>
               </a>
-              <a href="#" className="social-icon">
+              <a  className="social-icon">
                 <i className="ri-instagram-line"></i>
               </a>
             </div>
@@ -148,6 +212,7 @@ const Login = () => {
               </a>
             </div>
           </form>
+          {notification && <Notification status={notification.status} title={notification.title} message={notification.message} />}
         </div>
       </div>
 

@@ -11,7 +11,7 @@ function Homepage() {
         <div className=" hot_places">
           <div className="section_title">
             <img src="./assets/images/hot.svg" alt="" />
-            <h3>Hot Places</h3>
+            <h3>Best Places</h3>
           </div>
           <Post />
         </div>

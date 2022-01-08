@@ -143,6 +143,7 @@ const Wrapper = styled.nav`
     color: white;
     background-color: ${(props) => props.theme.primary};
     border-radius: 50px;
+    cursor: pointer;
   }
 
   .menu_icon {
