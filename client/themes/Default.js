@@ -12,3 +12,4 @@ export const Default = {
   /*============ OTHERS ===========*/
   buttonBorderRadius: "50px",
 };
+

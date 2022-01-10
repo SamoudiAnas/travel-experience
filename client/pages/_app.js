@@ -23,9 +23,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         />
         <title>Travel Experience</title>
       </Head>
+
+
       <SessionProvider session={session}>
         <ThemeProvider theme={Default}>
-          <Component {...pageProps} />
+            <Component {...pageProps} />
         </ThemeProvider>
       </SessionProvider>
     </>
