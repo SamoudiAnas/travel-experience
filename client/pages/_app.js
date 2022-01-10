@@ -5,6 +5,7 @@ import Head from "next/head";
 //themes
 import { ThemeProvider } from "styled-components";
 import { Default } from "../themes/Default";
+import Layout from "../components/Layout";
 
 function MyApp({ Component, pageProps: { session, ...pageProps } }) {
   return (
@@ -24,10 +25,11 @@ function MyApp({ Component, pageProps: { session, ...pageProps } }) {
         <title>Travel Experience</title>
       </Head>
 
-
       <SessionProvider session={session}>
         <ThemeProvider theme={Default}>
+          <Layout>
             <Component {...pageProps} />
+          </Layout>
         </ThemeProvider>
       </SessionProvider>
     </>

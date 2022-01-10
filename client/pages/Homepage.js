@@ -5,8 +5,6 @@ import Post from "../components/Post";
 function Homepage() {
   return (
     <Wrapper>
-      <Navbar />
-
       <div className="responsive_container layout">
         <div className=" hot_places">
           <div className="section_title">
