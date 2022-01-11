@@ -8,7 +8,7 @@ import SearchInput from "./SearchInput";
 //icons
 import { BiMenuAltLeft } from "react-icons/bi";
 
-function Navbar() {
+function Navbar(props) {
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const toggleLinks = () => {
@@ -50,7 +50,7 @@ function Navbar() {
           <Link href="/destinations">
             <div className="link">Destinations</div>
           </Link>
-          <Link href="/contact">
+          <Link href="/booking">
             <div className="link">Booking</div>
           </Link>
         </div>
@@ -62,6 +62,7 @@ function Navbar() {
         </Link>
       </div>
       <BiMenuAltLeft className="menu_icon" onClick={toggleLinks} />
+      {props.children}
     </Wrapper>
   );
 }

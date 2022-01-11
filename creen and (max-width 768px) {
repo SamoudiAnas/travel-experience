@@ -1,0 +1,23 @@
+[33mcommit f53b93cb535e5a6ffbc5e02c6c7c4eccc7904f9b[m[33m ([m[1;36mHEAD -> [m[1;32mmain[m[33m)[m
+Author: Anas Samoudi <unlimiteddez@gmail.com>
+Date:   Thu Jan 6 23:54:02 2022 +0100
+
+    Adding Styled Components w/ Responsive Navbar
+
+[33mcommit 566a1f8cdd50108d9d79805d26eb56178560c2ba[m[33m ([m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m
+Author: Amine Elkhalidy <elkhalidyamine.a@gmail.com>
+Date:   Thu Jan 6 15:31:28 2022 +0100
+
+    Pushing login and signup page
+
+[33mcommit b267fc6e950d3220439cebae6017f874bcd62d42[m
+Author: Amine Elkhalidy <elkhalidyamine.a@gmail.com>
+Date:   Sat Jan 1 18:14:45 2022 +0100
+
+    New file has been added!
+
+[33mcommit a0407e0e9e5c088ee08d5891ae6f9f1b853abb00[m
+Author: Samoudi_Anas <72927816+SamoudiAnas@users.noreply.github.com>
+Date:   Sat Jan 1 18:02:24 2022 +0100
+
+    Initial commit
