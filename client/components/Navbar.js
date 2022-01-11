@@ -50,7 +50,7 @@ function Navbar(props) {
           <Link href="/destinations">
             <div className="link">Destinations</div>
           </Link>
-          <Link href="/contact">
+          <Link href="/booking">
             <div className="link">Booking</div>
           </Link>
         </div>

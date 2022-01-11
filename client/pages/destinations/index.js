@@ -1,5 +1,6 @@
 import React from "react";
 //import Masonry from 'react-masonry-css'
+import Link from 'next/link'
 import styled from "styled-components";
 import PopularDestinations from "../../components/Destination/popular-destinations/popular-destinations";
 import TopDestinations from "../../components/Destination/top-destinations/top-destinations";
@@ -73,7 +74,7 @@ const DESTINATIONS = [
 
 const Section = styled.section`
   .section {
-    padding: 5rem 0 2rem;
+    padding: 2rem 0 2rem;
   }
 
   .section__container {
@@ -257,7 +258,9 @@ const Destinations = () => {
             <h3 className="section__subtitle">Popular Destinations</h3>
             <div className="box__container grid">
               {DESTINATIONS.map((item) => (
-                <PopularDestinations key={item.id} item={item} />
+                <Link href={`/destinations/${item.title}`}>
+                  <PopularDestinations key={item.id} item={item} />
+                </Link>
               ))}
             </div>
           </div>
